@@ -43,7 +43,13 @@ def patch(target_class):
                 for i in ["is_property", "is_static", "is_context"]
             }
 
-            if iscoroutinefunction(func):
+            '''if iscoroutinefunction(func):
+                async_to_sync(container, name)
+                func = getattr(container, name)'''
+            if iscoroutinefunction(func) and not (
+                target_class.__name__ == "MessageHandler"
+                and name in {"resolve_listener", "check"}
+            ):
                 async_to_sync(container, name)
                 func = getattr(container, name)
 
