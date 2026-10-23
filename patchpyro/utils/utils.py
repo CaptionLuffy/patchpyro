@@ -43,7 +43,7 @@ def patch(target_class):
                 for i in ["is_property", "is_static", "is_context"]
             }
 
-            if not iscoroutinefunction(func):
+            if iscoroutinefunction(func):
                 async_to_sync(container, name)
                 func = getattr(container, name)
 
