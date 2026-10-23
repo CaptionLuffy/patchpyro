@@ -1,5 +1,5 @@
 import re
-
+from pathlib import Path
 import setuptools
 
 with open("README.md") as fp:
@@ -7,8 +7,9 @@ with open("README.md") as fp:
 
 requirements = ["kurigram>=2.0.69"]
 
+init_file = Path(__file__).parent / "patchpyro" / "__init__.py"
 # pyright: reportOptionalSubscript=false
-with open(r"patchpyro\__init__.py") as fp:
+with init_file.open(encoding="utf-8") as fp:
     contents = fp.read()
     version = re.search(r"__version__ = ['\"]([^'\"]+)['\"]", contents)[1]
 
